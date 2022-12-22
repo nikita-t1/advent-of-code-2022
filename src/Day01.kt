@@ -16,7 +16,22 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        val caloriesList = mutableListOf<Int>()
+        var currentElfCalories = 0
+        input.forEach { line ->
+            run {
+                if (line.isBlank()) {
+                    caloriesList.add(currentElfCalories)
+                    currentElfCalories = 0
+                } else {
+                    currentElfCalories += line.toInt()
+                }
+            }
+        }
+        val topThreeMostCalories = caloriesList.sorted().takeLast(3)
+        var totalCalories = 0
+        topThreeMostCalories.forEach { totalCalories += it }
+        return totalCalories
     }
 
     // test if implementation meets criteria from the description, like:
